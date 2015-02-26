@@ -58,6 +58,13 @@ class Site_Setup_Wizard_NSD {
 	protected $version;
 
 	/**
+	 * @since    0.0.1
+	 * @access   private
+	 * @var      This is a Test Variable 1
+	 */
+	public $ssw_test_var1 = 'Test Var 1';
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -70,6 +77,8 @@ class Site_Setup_Wizard_NSD {
 
 		$this->plugin_name = 'site-setup-wizard';
 		$this->version = '0.0.1';
+
+	//	$this->ssw_test_var1 = 'Test Var 1';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -152,6 +161,8 @@ class Site_Setup_Wizard_NSD {
 
 		$plugin_admin = new Site_Setup_Wizard_Admin( $this->get_plugin_name(), $this->get_version() );
 
+		// Add action to display Create Site menu item in Network Admin's Dashboard
+		$this->loader->add_action( 'network_admin_menu', $plugin_admin, 'ssw_network_menu' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
@@ -212,5 +223,4 @@ class Site_Setup_Wizard_NSD {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

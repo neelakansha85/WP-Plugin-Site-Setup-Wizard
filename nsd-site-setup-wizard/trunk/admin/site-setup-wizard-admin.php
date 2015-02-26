@@ -41,6 +41,27 @@ class Site_Setup_Wizard_Admin {
 	private $version;
 
 	/**
+	 * @since    0.0.1
+	 * @access   private
+	 * @var      The url slug for Site Setup Wizard's Create Site Page
+	 */
+	private $ssw_create_site_slug = 'Site_Setup_Wizard';
+
+	/**
+	 * @since    0.0.1
+	 * @access   private
+	 * @var      The url slug for Site Setup Wizard's Options Page
+	 */
+	private $ssw_options_page_slug = 'Site_Setup_Wizard_Options';
+	
+	/**
+	 * @since    0.0.1
+	 * @access   private
+	 * @var      The url slug for Site Setup Wizard's Create Site Page
+	 */
+	private $ssw_plugin_fixed_dir = 'nsd-site-setup-wizard/';
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    0.0.1
@@ -51,7 +72,54 @@ class Site_Setup_Wizard_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		
+	}
 
+	/**
+	 * Menu function to display Site Setup Wizard -> Create Site in the Network Admin's Dashboard
+	 *
+	 * @since    0.0.1
+	 */
+	public function ssw_network_menu() {
+		
+		/**
+		 * This function adds menu item "Create Site" in Network Admin Dashboard, 
+		 * allowing it to be displayed for all users including subscribers with "read"
+		 * capability and displaying it above the Dashboard with position "1.27"
+		 */
+
+		add_menu_page('Site Setup Wizard', 'Create Site', 'read', $this->ssw_create_site_slug, 
+			array($this, 'ssw_print_test_data'), plugins_url($this->ssw_plugin_fixed_dir.'admin/images/icon.png'), '1.27');
+		
+		// Adding First Sub menu item in the SSW Plugin to reflect the Create Site functionality in the sub menu
+		add_submenu_page($this->ssw_create_site_slug, 'Site Setup Wizard', 'Create Site', 'read',
+			$this->ssw_create_site_slug, array($this, 'ssw_print_test_data') );
+		// Adding SSW Options page in the Network Dashboard below the Create Site menu item
+		add_submenu_page($this->ssw_create_site_slug, 'Site Setup Wizard Options', 'Options', 'manage_network', 
+			$this->ssw_options_page_slug, array($this, 'ssw_print_test_data') );
+		// Adding SSW Reports page in the Network Dashboard below the Create Site menu item
+/*		add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Analytics', 'Analytics', 'manage_network', 
+			SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page') );
+*/
+	}
+	
+	/**
+	 * Print Test Data for Debug and Development Purpose
+	 *
+	 * @since    0.0.1
+	 */
+	public function ssw_print_test_data() {
+		
+		echo '<h3>Options Page</h3>';
+
+		echo '<p>This page will be having all the available options to configure for the Site Setup Wizard Plugin</p>';
+
+		echo '<p>Following is the Demo of different Sanitize functions of wordpress for reference<br/>';
+
+		$ssw_plugin_fixed_dir = plugin_dir_path( __FILE__ ) ;
+		echo "ssw_plugin_fixed_dir = ".$ssw_plugin_fixed_dir;
+		echo '<br/><br/>Calling test variable<br/><br/>';
+		echo 'Test Var1 = '.Site_Setup_Wizard_NSD::$ssw_test_var1;
 	}
 
 	/**
