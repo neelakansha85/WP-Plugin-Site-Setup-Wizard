@@ -3,11 +3,11 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://github.com/neelakansha85/WP-Plugin-Site-Setup-Wizard
+ * @since      0.0.1
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Site_Setup_Wizard_NSD
+ * @subpackage Site_Setup_Wizard_NSD/includes
  */
 
 /**
@@ -17,16 +17,16 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
+ * @package    Site_Setup_Wizard_NSD
+ * @subpackage Site_Setup_Wizard_NSD/includes
+ * @author     Neel Shah <neel@nsdesigners.com>
  */
-class Plugin_Name_Loader {
+class Site_Setup_Wizard_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
 	 * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
 	 */
@@ -35,7 +35,7 @@ class Plugin_Name_Loader {
 	/**
 	 * The array of filters registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
 	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
 	 */
@@ -44,7 +44,7 @@ class Plugin_Name_Loader {
 	/**
 	 * Initialize the collections used to maintain the actions and filters.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function __construct() {
 
@@ -56,7 +56,7 @@ class Plugin_Name_Loader {
 	/**
 	 * Add a new action to the collection to be registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @param      string               $hook             The name of the WordPress action that is being registered.
 	 * @param      object               $component        A reference to the instance of the object on which the action is defined.
 	 * @param      string               $callback         The name of the function definition on the $component.
@@ -70,7 +70,7 @@ class Plugin_Name_Loader {
 	/**
 	 * Add a new filter to the collection to be registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @param      string               $hook             The name of the WordPress filter that is being registered.
 	 * @param      object               $component        A reference to the instance of the object on which the filter is defined.
 	 * @param      string               $callback         The name of the function definition on the $component.
@@ -85,7 +85,7 @@ class Plugin_Name_Loader {
 	 * A utility function that is used to register the actions and hooks into a single
 	 * collection.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 * @param      array                $hooks            The collection of hooks that is being registered (that is, actions or filters).
 	 * @param      string               $hook             The name of the WordPress filter that is being registered.
@@ -112,7 +112,7 @@ class Plugin_Name_Loader {
 	/**
 	 * Register the filters and actions with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function run() {
 

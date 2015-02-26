@@ -5,11 +5,11 @@
  *
  * This file is used to markup the public-facing aspects of the plugin.
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://github.com/neelakansha85/WP-Plugin-Site-Setup-Wizard
+ * @since      0.0.1
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/admin/partials
+ * @package    Site_Setup_Wizard_NSD
+ * @subpackage Site_Setup_Wizard_NSD/admin/partials
  */
 ?>
 
