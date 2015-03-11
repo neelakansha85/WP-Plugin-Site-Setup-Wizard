@@ -58,11 +58,20 @@ class Site_Setup_Wizard_NSD {
 	protected $version;
 
 	/**
+	 * The main table name for all data of Site Setup Wizard plugin in the database.
+	 *
 	 * @since    0.0.1
-	 * @access   private
+	 * @access   protected
+	 * @var      string    $version    The current version of the plugin.
+	 */
+	protected $ssw_main_table;
+
+	/**
+	 * @since    0.0.1
+	 * @access   protected
 	 * @var      This is a Test Variable 1
 	 */
-	public $ssw_test_var1 = 'Test Var 1';
+	protected $ssw_test_var1 = 'Test Var 1';
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -77,8 +86,6 @@ class Site_Setup_Wizard_NSD {
 
 		$this->plugin_name = 'site-setup-wizard';
 		$this->version = '0.0.1';
-
-	//	$this->ssw_test_var1 = 'Test Var 1';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -222,5 +229,27 @@ class Site_Setup_Wizard_NSD {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Gets the value of ssw_test_var1.
+	 *
+	 * @since     0.0.1
+	 * @return    string    This is a Test Variable 1
+	 */
+	public function get_ssw_test_var1() {
+		return $this->ssw_test_var1;
+	}
+
+	/**
+	 * Sets the value of ssw_test_var1.
+	 *
+	 * @since     0.0.1
+	 * @param     $ssw_test_var1  to set the value for ssw_test_var1
+	 * @return    self
+	 */
+	public function set_ssw_test_var1($ssw_test_var1) {
+		$this->ssw_test_var1 = $ssw_test_var1;
+		return $this;
 	}
 }

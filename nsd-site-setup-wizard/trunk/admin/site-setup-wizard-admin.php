@@ -50,29 +50,51 @@ class Site_Setup_Wizard_Admin {
 	/**
 	 * @since    0.0.1
 	 * @access   private
-	 * @var      The url slug for Site Setup Wizard's Options Page
+	 * @var      The url slug for Site Setup Wizard's Settings Page
 	 */
-	private $ssw_options_page_slug = 'Site_Setup_Wizard_Options';
+	private $ssw_settings_page_slug = 'Site_Setup_Wizard_Settings';
 	
 	/**
 	 * @since    0.0.1
 	 * @access   private
-	 * @var      The url slug for Site Setup Wizard's Create Site Page
+	 * @var      The plugin url for admin dir of Site Setup Wizard
 	 */
-	private $ssw_plugin_fixed_dir = 'nsd-site-setup-wizard/';
+	private $ssw_plugin_admin_url;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    0.0.1
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param    string    $plugin_name 		The name of this plugin.
+	 * @param    string    $version 			The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->ssw_plugin_admin_url = plugin_dir_url( __FILE__ );
+		$this->load_dependencies();
 		
+	}
+
+	/**
+	 * Load the required dependencies for this plugin.
+	 *
+	 * Include the following files that make up the plugin:
+	 *
+	 * - Site_Setup_Wizard_Settings. Orchestrates the Settings page of the plugin.
+	 *
+	 * @since    0.0.1
+	 * @access   private
+	 */
+	private function load_dependencies() {
+
+		/**
+		 * The class responsible for orchestrating the actions and filters of the
+		 * Settings page of Site Setup Wizard
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/site-setup-wizard-settings.php';
+
 	}
 
 	/**
@@ -89,18 +111,20 @@ class Site_Setup_Wizard_Admin {
 		 */
 
 		add_menu_page('Site Setup Wizard', 'Create Site', 'read', $this->ssw_create_site_slug, 
-			array($this, 'ssw_print_test_data'), plugins_url($this->ssw_plugin_fixed_dir.'admin/images/icon.png'), '1.27');
+			array($this, 'ssw_print_test_data'), $this->ssw_plugin_admin_url.'images/icon.png', '1.27');
 		
 		// Adding First Sub menu item in the SSW Plugin to reflect the Create Site functionality in the sub menu
 		add_submenu_page($this->ssw_create_site_slug, 'Site Setup Wizard', 'Create Site', 'read',
-			$this->ssw_create_site_slug, array($this, 'ssw_print_test_data') );
-		// Adding SSW Options page in the Network Dashboard below the Create Site menu item
-		add_submenu_page($this->ssw_create_site_slug, 'Site Setup Wizard Options', 'Options', 'manage_network', 
-			$this->ssw_options_page_slug, array($this, 'ssw_print_test_data') );
+			$this->ssw_create_site_slug, array($this, 'ssw_print_test_data'));
+		// Adding SSW Settings page in the Network Dashboard below the Create Site menu item
+		add_submenu_page($this->ssw_create_site_slug, 'Site Setup Wizard Settings', 'Settings', 'manage_network', 
+			$this->ssw_settings_page_slug, array($this, 'ssw_settings'));
 		// Adding SSW Reports page in the Network Dashboard below the Create Site menu item
-/*		add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Analytics', 'Analytics', 'manage_network', 
-			SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page') );
-*/
+		/*
+		add_submenu_page(SSW_CREATE_SITE_SLUG, 'Site Setup Wizard Analytics', 'Analytics', 'manage_network', 
+			SSW_ANALYTICS_PAGE_SLUG, array($this, 'ssw_analytics_page'));
+		*/
+
 	}
 	
 	/**
@@ -119,7 +143,23 @@ class Site_Setup_Wizard_Admin {
 		$ssw_plugin_fixed_dir = plugin_dir_path( __FILE__ ) ;
 		echo "ssw_plugin_fixed_dir = ".$ssw_plugin_fixed_dir;
 		echo '<br/><br/>Calling test variable<br/><br/>';
-		echo 'Test Var1 = '.Site_Setup_Wizard_NSD::$ssw_test_var1;
+		
+		$site_setup_wizard_nsd = new Site_Setup_Wizard_NSD();
+		$ssw_test_var1 = $site_setup_wizard_nsd->get_ssw_test_var1();
+		echo 'Test Var1 = '.$ssw_test_var1;
+	}
+
+	/**
+	 * Settings Page for Site Setup Wizard 
+	 *
+	 * @since    0.0.1
+	 */
+	public function ssw_settings() {
+		
+		echo '<h3>Settings Page</h3>';
+
+		$site_setup_wizard_settings = new Site_Setup_Wizard_Settings;
+		
 	}
 
 	/**
